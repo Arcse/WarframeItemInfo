@@ -15,7 +15,7 @@
     },
     "browser_action": {
         "default_icon": "images/warframe_logo-32x.png",
-        "default_title": "Click to Toggle"
+        "default_title": "Click to toggle!"
       },
       "permissions": [
         "activeTab",

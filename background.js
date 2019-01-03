@@ -1,42 +1,19 @@
-chrome.browserAction.onClicked.addListener(buttonClicked);
+let buttonState = localStorage.buttonState || "off";
 
-let currentState = localStorage.currentState || "true";
-
-function buttonClicked(tab) {
-
-    if (currentState === "true") {
-        localStorage.currentState = "false";
-        currentState = localStorage.currentState;
-        chrome.tabs.query({}, function (tabs) {
-            for (let i = 0; i < tabs.length; i++) {
-                // chrome.browserAction.setIcon({
-                //     path : "images/cat_logo-32x.png"
-                //   });
-                // execute(tabs[i]);
-            }
-        });
+chrome.browserAction.onClicked.addListener(function (tab) {
+    if (buttonState === "on") {
+        localStorage.buttonState = "off";
+        buttonState = localStorage.buttonState;
     } 
 
-    else if (currentState === "false") {
-        localStorage.currentState = "true";
-        currentState = localStorage.currentState;
-
-        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-            for (let i = 0; i < tabs.length; i++) {
-                // chrome.browserAction.setIcon({
-                //     path : "images/warframe_logo-32x.png"
-                //  });
-                // execute(tabs[i]);
-
-            }
-        });
+    else if (buttonState === "off") {
+        localStorage.buttonState = "on";
+        buttonState = localStorage.buttonState;
     }
-}
+});
 
-
-// function execute(tab) {
-//     if (!/.*google\....?\/search\?.*/.test(tab.url)) {
-//         chrome.tabs.executeScript(tab.id, {file: 'content.js'});
-//     }
-
-// }
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    if (changeInfo.status === 'complete' && buttonState === "on") {
+        chrome.tabs.executeScript(tab.id, {file: 'createGoogleCard.js'});
+    }
+});

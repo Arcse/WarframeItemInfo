@@ -1,5 +1,5 @@
-chrome.runtime.onMessage.addListener(gotMessage);
+chrome.runtime.onMessage.addListener(onClicked);
 
-//function gotMessage(message, sender, sendResponse){
-    //console.log(message.txt)
-//}
+function onClicked(message, sender, sendResponse){
+    
+}
