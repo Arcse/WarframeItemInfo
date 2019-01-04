@@ -35,6 +35,8 @@ function getCourseNumber(courseCode){
 function getCourseInfo(courseName, courseNumber){
     let data = null;
     $.ajax({
+        type: 'GET',
+        dataType: 'json',
         'async': false,
         url: "https://api.uwaterloo.ca/v2/courses/" + courseName + "/" + courseNumber + ".json?key=8ac2f9b6a0c4f5ba67b8fd43ba2d899a",
         success: function (response) {
