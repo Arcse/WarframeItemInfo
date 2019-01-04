@@ -1,7 +1,13 @@
 $(document).ready(function () {
     let courseName = getCourseName(courseCode);
     let courseNumber = getCourseNumber(courseCode);
-    // getCourseInfo(courseName, courseNumber);
+    let courseInfo = getCourseInfo(courseName, courseNumber);
+    if (courseInfo === null){
+        alert("course not found")
+    }
+    else{
+        console.log(courseInfo);
+    }
 });
 
 function getCourseName(courseCode){
@@ -25,5 +31,17 @@ function getCourseNumber(courseCode){
     }
 }
 
-// function getCourseInfo(courseName, courseNumber){
-// }
+
+function getCourseInfo(courseName, courseNumber){
+    let data = null;
+    $.ajax({
+        'async': false,
+        url: "https://api.uwaterloo.ca/v2/courses/" + courseName + "/" + courseNumber + ".json?key=8ac2f9b6a0c4f5ba67b8fd43ba2d899a",
+        success: function (response) {
+            if (response.meta.message === "Request successful"){
+                data = response.data;
+            }
+        }
+    });
+    return data;
+}
