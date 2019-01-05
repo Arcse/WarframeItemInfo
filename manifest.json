@@ -2,6 +2,7 @@
     "manifest_version": 2,
     "name": "WaterlooCourseInfo",
     "version": "1.0",
+    "description": "Just an app",
     "content_scripts":[
         {
             "matches": [
@@ -11,10 +12,10 @@
         }
     ],
     "background": {
-        "scripts": ["background.js"]
+        "scripts": ["scripts/background.js"]
     },
     "browser_action": {
-        "default_icon": "images/warframe_logo-32x.png",
+        "default_icon": "images/UW_reglogo_128x.png",
         "default_title": "Click to toggle!"
       },
       "permissions": [
