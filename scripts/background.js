@@ -4,13 +4,13 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     if (buttonState === "on") {
         localStorage.buttonState = "off";
         buttonState = localStorage.buttonState;
-        alert("extension is off");
+        chrome.browserAction.setIcon({path:"images/UW_blacklogo_128x.png"});
     } 
 
     else if (buttonState === "off") {
         localStorage.buttonState = "on";
         buttonState = localStorage.buttonState;
-        alert("extension is on");
+        chrome.browserAction.setIcon({path:"images/UW_reglogo_128x.png"});
     }
 });
 
@@ -25,7 +25,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
                 function() {
                     // Executing the JS file.
                     chrome.tabs.insertCSS(tab.id, {file:"dependencies/bootstrap-4.2.1-dist/bootstrap.min.css"})
-                    chrome.tabs.executeScript(tab.id, {file: "createGoogleCard.js"});
+                    chrome.tabs.executeScript(tab.id, {file: "createCard.js"});
             });
         }
     }
