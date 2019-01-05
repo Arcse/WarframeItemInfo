@@ -15,7 +15,7 @@
         "scripts": ["scripts/background.js"]
     },
     "browser_action": {
-        "default_icon": "images/UW_blacklogo_128x.png",
+        "default_icon": "images/UWWhite128x.png",
         "default_title": "Click to toggle!"
       },
       "permissions": [
