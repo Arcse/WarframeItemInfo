@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "UWaterloo Course Info",
     "version": "0.0.0.2",
-    "description": "Provides iformation on UWaterloo Courses when searched on Google.",
+    "description": "Provides information about UWaterloo Courses when searched on Google.",
     "content_scripts":[
         {
             "matches": [
