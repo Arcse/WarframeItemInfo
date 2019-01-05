@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "Waterloo Course Info",
-    "version": "0.0.0.1",
-    "description": "Provides information about Waterloo Courses when searched on Google.",
+    "name": "UWaterloo Course Info",
+    "version": "0.0.0.2",
+    "description": "Provides iformation on UWaterloo Courses when searched on Google.",
     "content_scripts":[
         {
             "matches": [
@@ -16,7 +16,7 @@
     },
     "browser_action": {
         "default_icon": "images/UWYellow128x.png",
-        "default_title": "Click to toggle!"
+        "default_title": "Click to Toggle!"
       },
       "permissions": [
         "activeTab",
