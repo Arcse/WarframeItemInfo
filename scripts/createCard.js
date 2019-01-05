@@ -136,7 +136,7 @@ function addLinks(content, data){
     let exams = document.createElement("a");
     exams.className = "btn btn-outline-primary";
     exams.setAttribute("style", "margin-left: 10px;");
-    exams.setAttribute("href", "https://uwflow.com/course/" + data.subject.toLowerCase() + data.catalog_number);
+    exams.setAttribute("href", "https://uwflow.com/course/" + data.subject.toLowerCase() + data.catalog_number.toLowerCase());
     exams.innerText = "View UWFlow";
     
     content.append(source);
