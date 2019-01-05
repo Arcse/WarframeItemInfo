@@ -4,18 +4,18 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     if (buttonState === "on") {
         localStorage.buttonState = "off";
         buttonState = localStorage.buttonState;
-        chrome.browserAction.setIcon({path:"images/UW_blacklogo_128x.png"});
+        chrome.browserAction.setIcon({path:"images/UWWhite128x.png"});
     } 
 
     else if (buttonState === "off") {
         localStorage.buttonState = "on";
         buttonState = localStorage.buttonState;
-        chrome.browserAction.setIcon({path:"images/UW_reglogo_128x.png"});
+        chrome.browserAction.setIcon({path:"images/UWYellow128x.png"});
     }
 });
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (changeInfo.status === 'complete' && buttonState === "on" && /.*google\....?\/search\?.*/.test(tab.url)){
+    if (buttonState === "on" && changeInfo.status === 'complete' && /.*google\....?\/search\?.*/.test(tab.url)){
         var query = tab.url.substr(1).split("&");
         var userInput = query[1].slice(query[1].indexOf("=") + 1);
         if (/^[a-zA-Z]{2,}\+?[0-9]{3}[a-zA-Z]?$/.test(userInput)) {

@@ -58,9 +58,9 @@ function createCard(data) {
     label_text.className = "text-muted";
     label_text.innerText = "Provided by Waterloo Course Info Chrome Extension.";
 
-    createHeader(header, data);
-    createInfo(content, data);
-    createLinks(content, data)
+    addHeader(header, data);
+    addInfo(content, data);
+    addLinks(content, data)
     card.append(header);
     card.append(content);
     card.append(label);
@@ -68,7 +68,7 @@ function createCard(data) {
     return card;
 }
 
-function createHeader(header, data) {
+function addHeader(header, data) {
 
     let title = document.createElement("h5");
     title.className = "card-title";
@@ -82,7 +82,7 @@ function createHeader(header, data) {
     header.append(subtitle);
 }
 
-function createInfo(content, data) {
+function addInfo(content, data) {
 
     let description = document.createElement("h5");
     description.className = "card-text";
@@ -110,10 +110,15 @@ function createInfo(content, data) {
     let offerings = document.createElement("h6");
     offerings.className = "card-text";
     offerings.innerText = "Offerings: "
-    for (e in data.terms_offered){
-        offerings.innerText += (data.terms_offered[e] + ", ")
+    if (data.terms_offered.length === 0){
+        offerings.innerText += "N/A"
     }
-    offerings.innerText = offerings.innerText.slice(0, offerings.innerText.length - 2);
+    else{
+        for (e in data.terms_offered){
+            offerings.innerText += (data.terms_offered[e] + ", ")
+        }
+        offerings.innerText = offerings.innerText.slice(0, offerings.innerText.length - 2);
+    }
 
     content.append(description);
     content.append(units);
@@ -123,18 +128,18 @@ function createInfo(content, data) {
     content.append(offerings);
 }
 
-function createLinks(content, data){
+function addLinks(content, data){
     let source = document.createElement("a");
     source.className = "btn btn-outline-primary";
     source.setAttribute("href", data.url);
-    source.innerText = "View Calendar/More Info";
+    source.innerText = "View Calendar";
 
     let exams = document.createElement("a");
     exams.className = "btn btn-outline-primary";
     exams.setAttribute("style", "margin-left: 10px;");
-    exams.setAttribute("href", "https://cas.uwaterloo.ca/cas/login?service=http%3A%2F%2Fmathsoc.uwaterloo.ca%2Fexambank");
-    exams.innerText = "View Past Exams";
-
+    exams.setAttribute("href", "https://uwflow.com/course/" + data.subject.toLowerCase() + data.catalog_number);
+    exams.innerText = "View UWFlow";
+    
     content.append(source);
     content.append(exams);
 }
