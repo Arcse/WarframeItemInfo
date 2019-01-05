@@ -24,6 +24,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
                 {code: 'var courseCode = ' + JSON.stringify(userInput)}, 
                 function() {
                     // Executing the JS file.
+                    chrome.tabs.insertCSS(tab.id, {file:"dependencies/bootstrap-4.2.1-dist/bootstrap.min.css"})
                     chrome.tabs.executeScript(tab.id, {file: "createGoogleCard.js"});
                     chrome.tabs.executeScript(tab.id, {file: "fillGoogleCard.js"});
             });
