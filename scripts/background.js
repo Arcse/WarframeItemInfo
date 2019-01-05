@@ -21,14 +21,14 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     if (buttonState === "on") {
         localStorage.buttonState = "off";
         buttonState = localStorage.buttonState;
-        chrome.notifications.create(off)
+        chrome.notifications.create(off);
         // chrome.browserAction.setIcon({path:"images/UWWhite128x.png"});
     } 
 
     else if (buttonState === "off") {
         localStorage.buttonState = "on";
         buttonState = localStorage.buttonState;
-        chrome.notifications.create(on)
+        chrome.notifications.create(on);
         // chrome.browserAction.setIcon({path:"images/UWYellow128x.png"});
     }
 });
