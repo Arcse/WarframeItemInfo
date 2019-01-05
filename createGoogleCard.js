@@ -43,7 +43,10 @@ function getCourseNumber(courseCode){
 function createCard(data) {
     let card = document.createElement("div");
     card.className = "card";
-    // card.setAttribute("style", "margin-bottom: 15px;");
+    card.setAttribute("style", "margin-bottom: 15px;");
+
+    let header = document.createElement("div");
+    header.className = "card-header";
 
     let content = document.createElement("div");
     content.className = "tab-content";
@@ -53,110 +56,64 @@ function createCard(data) {
 
     let label_text = document.createElement("small");
     label_text.className = "text-muted";
-    label_text.innerText = "Provided by Waterloo Course Info Chrome Extension. Not affiliated with University of Waterloo or Google.";
+    label_text.innerText = "Provided by Waterloo Course Info Chrome Extension.";
 
-    createHeader(content, data);
-    // createOverview(content, data);
-    // createRequisites(content, data);
-    // createMoreInfo(content, data);
+    createHeader(header, data);
+    createInfo(content,data);
+    card.append(header);
     card.append(content);
     card.append(label);
     label.append(label_text);
     return card;
 }
 
-function createHeader(content, data) {
-    let header = document.createElement("div");
-    header.className = "card-header";
+function createHeader(header, data) {
 
     let title = document.createElement("h5");
     title.className = "card-title";
     title.innerText = data.subject.toUpperCase() + " " + data.catalog_number + ": " + data.title;
 
     let subtitle = document.createElement("h6");
-    subtitle.className = "card-subtitle mb-2 text-muted";
+    subtitle.className = "card-subtitle";
     subtitle.innerText = data.academic_level.charAt(0).toUpperCase() + data.academic_level.slice(1) + " Course";
 
     header.append(title);
     header.append(subtitle);
-    content.append(header);
 }
 
-// function createOverview(parent, code, info) {
-//     let textbooks = document.createElement("a");
-//     textbooks.className = "btn btn-primary";
-//     textbooks.setAttribute("href", "http://murad-akh.ca/uoftbooks/cinfo/index.html?filter?q=course_code:%22" + code + "%22");
-//     textbooks.innerText = "View Textbooks";
+function createInfo(content, data) {
 
-//     let exams = document.createElement("a");
-//     exams.className = "btn btn-primary";
-//     exams.setAttribute("style", "margin-left: 10px;");
-//     exams.setAttribute("href", "https://exams-library-utoronto-ca.myaccess.library.utoronto.ca/simple-search?location=%2F&query=" + code);
-//     exams.innerText = "View Past Exams";
+    let description = document.createElement("h5");
+    description.className = "card-text";
+    description.innerText = (data.description || "None");
+    if (description.innerText !== "None"){
+        description.innerText = data.description.slice(0, data.description.indexOf("["));
+    }
 
-//     let description_element = document.createElement("p");
-//     description_element.className = "card-text";
-//     description_element.innerText = info.description;
+    let units = document.createElement("h5");
+    units.className = "card-text";
+    units.innerText = "Units: " + (data.units || "h5");
 
-//     parent.append(description_element);
-//     parent.append(textbooks);
-//     parent.append(exams);
-// }
+    let prerequisites = document.createElement("h5");
+    prerequisites.className = "card-text";
+    prerequisites.innerText = "Prerequisites: " + (data.prerequisites || "None");
 
-// function createRequirements(parent, code, info) {
-//     const format = new RegExp('[A-Z][A-Z][A-Z][1-4a-d][0-9][0-9]', 'mgi');
+    let corequisites = document.createElement("h5");
+    corequisites.className = "card-text";
+    corequisites.innerText = "Corequisites: " + (data.corequisites || "None");
 
-//     let prerequisites = document.createElement("p");
-//     prerequisites.className = "card-text";
-//     prerequisites.innerHTML = "Prerequisites: " + info.prerequisites.replace(format, replace);
+    let offerings = document.createElement("h5");
+    offerings.className = "card-text";
+    offerings.innerText = "Offerings: "
+    for (e in data.terms_offered){
+        offerings.innerText += (data.terms_offered[e] + ", ")
+    }
+    offerings.innerText = offerings.innerText.slice(0, offerings.innerText.length - 2);
 
-//     let exclusions = document.createElement("p");
-//     exclusions.className = "card-text";
-//     exclusions.innerHTML = "Exclusions: " + info.exclusions.replace(format, replace);
-
-//     let breadths = document.createElement("p");
-//     breadths.className = "card-text";
-//     breadths.innerHTML = "Breadths: " + info.breadths;
-
-//     parent.append(prerequisites);
-//     parent.append(exclusions);
-//     parent.append(breadths);
-// }
-
-// function createOfferings(parent, code, info) {
-//     let utsg = document.createElement("p");
-//     utsg.className = "card-text";
-//     utsg.innerHTML = "UTSG: " + sessionToLinks(info.crawled.sessions.utsg);
-
-//     let utsc = document.createElement("p");
-//     utsc.className = "card-text";
-//     utsc.innerHTML = "UTSC: " + sessionToLinks(info.crawled.sessions.utsc);
-
-//     let utm = document.createElement("p");
-//     utm.className = "card-text";
-//     utm.innerHTML = "UTM: " + sessionToLinks(info.crawled.sessions.utm);
-
-//     parent.append(utsg);
-//     parent.append(utsc);
-//     parent.append(utm);
-// }
-
-// function createInstructors(parent, code, info) {
-//     let utsg = document.createElement("p");
-//     utsg.className = "card-text";
-//     utsg.innerHTML = "UTSG: " + info.crawled.profs.utsg.join(', ');
-
-//     let utsc = document.createElement("p");
-//     utsc.className = "card-text";
-//     utsc.innerHTML = "UTSC: " + info.crawled.profs.utsc.join(', ');
-
-//     let utm = document.createElement("p");
-//     utm.className = "card-text";
-//     utm.innerHTML = "UTM: " + info.crawled.profs.utm.join(', ');
-
-//     parent.append(utsg);
-//     parent.append(utsc);
-//     parent.append(utm);
-
-// }
+    content.append(description);
+    content.append(units);
+    content.append(prerequisites);
+    content.append(corequisites);
+    content.append(offerings);
+}
 
