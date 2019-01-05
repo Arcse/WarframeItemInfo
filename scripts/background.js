@@ -35,11 +35,9 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     if (buttonState === "on" && changeInfo.status === 'complete' && /.www\.google\....?\/search\?.*/.test(tab.url)){
-        console.log("In Google Search");
         var query = tab.url.substr(1).split("&");
         var userInput = query[1].slice(query[1].indexOf("=") + 1);
         if (/^[a-zA-Z]{2,}\+?[0-9]{3}[a-zA-Z]?$/.test(userInput)) {
-            console.log("Valid Course Code")
             chrome.tabs.executeScript(tab.id, 
                 // Setting paremeter before execution of JS file
                 {code: 'var courseCode = ' + JSON.stringify(userInput)}, 
