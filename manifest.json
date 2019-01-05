@@ -6,7 +6,7 @@
     "content_scripts":[
         {
             "matches": [
-                "<all_urls>"
+                "\u003Call_urls>"
             ],
             "js": ["dependencies/jQuery/jquery-3.2.1.js"]
         }
@@ -15,13 +15,14 @@
         "scripts": ["scripts/background.js"]
     },
     "browser_action": {
-        "default_icon": "images/UWWhite128x.png",
+        "default_icon": "images/UWYellow128x.png",
         "default_title": "Click to toggle!"
       },
       "permissions": [
         "activeTab",
         "*://*/*",
         "storage",
-        "tabs"
+        "tabs",
+        "notifications"
       ]
 }

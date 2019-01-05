@@ -1,18 +1,39 @@
 let buttonState = localStorage.buttonState || "off";
 
+var on = {
+    type: "basic",
+     title: "Waterloo Course Info", 
+     message: "Enabled", 
+     iconUrl: "images/UWYellow128x.png",
+     silent: true,
+
+}
+
+var off = {
+    type: "basic",
+     title: "Waterloo Course Info", 
+     message: "Disabled", 
+     iconUrl: "images/UWYellow128x.png",
+     silent: true,
+}
+
 chrome.browserAction.onClicked.addListener(function (tab) {
     if (buttonState === "on") {
         localStorage.buttonState = "off";
         buttonState = localStorage.buttonState;
-        chrome.browserAction.setIcon({path:"images/UWWhite128x.png"});
+        chrome.notifications.create(off)
+        // chrome.browserAction.setIcon({path:"images/UWWhite128x.png"});
     } 
 
     else if (buttonState === "off") {
         localStorage.buttonState = "on";
         buttonState = localStorage.buttonState;
-        chrome.browserAction.setIcon({path:"images/UWYellow128x.png"});
+        chrome.notifications.create(on)
+        // chrome.browserAction.setIcon({path:"images/UWYellow128x.png"});
     }
 });
+
+
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     if (buttonState === "on" && changeInfo.status === 'complete' && /.*google\....?\/search\?.*/.test(tab.url)){
