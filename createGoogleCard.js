@@ -43,6 +43,7 @@ function getCourseNumber(courseCode){
 function createCard(data) {
     let card = document.createElement("div");
     card.className = "card";
+    card.setAttribute("style", "margin-bottom: 15px;");
 
     let header = document.createElement("div");
     header.className = "card-header";
@@ -90,19 +91,19 @@ function createInfo(content, data) {
         description.innerText = data.description.slice(0, data.description.indexOf("["));
     }
 
-    let units = document.createElement("h5");
+    let units = document.createElement("h6");
     units.className = "card-text";
     units.innerText = "Units: " + (data.units || "None");
 
-    let prerequisites = document.createElement("h5");
+    let prerequisites = document.createElement("h6");
     prerequisites.className = "card-text";
     prerequisites.innerText = "Prerequisites: " + (data.prerequisites || "None");
 
-    let corequisites = document.createElement("h5");
+    let corequisites = document.createElement("h6");
     corequisites.className = "card-text";
     corequisites.innerText = "Corequisites: " + (data.corequisites || "None");
 
-    let offerings = document.createElement("h5");
+    let offerings = document.createElement("h6");
     offerings.className = "card-text";
     offerings.innerText = "Offerings: "
     for (e in data.terms_offered){
