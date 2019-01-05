@@ -13,7 +13,6 @@ $(document).ready(function () {
                 let card = createCard(response.data);
                 bootstrap.append(card);
                 $("#topstuff").append(bootstrap);
-                console.log(response.data);
             }
         }
     });
