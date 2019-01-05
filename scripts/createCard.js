@@ -103,6 +103,10 @@ function createInfo(content, data) {
     corequisites.className = "card-text";
     corequisites.innerText = "Corequisites: " + (data.corequisites || "None");
 
+    let antirequisites = document.createElement("h6");
+    antirequisites.className = "card-text";
+    antirequisites.innerText = "Antirequisites: " + (data.antirequisites || "None");
+
     let offerings = document.createElement("h6");
     offerings.className = "card-text";
     offerings.innerText = "Offerings: "
@@ -115,6 +119,7 @@ function createInfo(content, data) {
     content.append(units);
     content.append(prerequisites);
     content.append(corequisites);
+    content.append(antirequisites);
     content.append(offerings);
 }
 
