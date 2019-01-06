@@ -6,7 +6,6 @@ var on = {
      message: "Enabled", 
      iconUrl: "images/UWYellow128x.png",
      silent: true,
-
 }
 
 var off = {
