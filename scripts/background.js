@@ -33,10 +33,17 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 });
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (buttonState === "on" && changeInfo.status === 'complete' && /.www\.google\....?\/search\?.*/.test(tab.url)){
-        var query = tab.url.substr(1).split("&");
-        var userInput = query[1].slice(query[1].indexOf("=") + 1);
-        if (/^[a-zA-Z]{2,}\+?[0-9]{3}[a-zA-Z]?$/.test(userInput)) {
+    if (buttonState === "on" && changeInfo.status === 'complete' && /(http|https):\/\/www\.google\./.test(tab.url)){
+        alert("in")
+        const url = new URL(tab.url)
+        const params = new URLSearchParams(url.search);
+        // var query = tab.url.substr(1).split("&");
+        // var userInput = query[1].slice(query[1].indexOf("=") + 1);
+        var userInput = params.get('q');
+        console.log(params);
+        console.log(userInput);
+        if (/^[a-zA-Z]{2,}\s?[0-9]{3}[a-zA-Z]?$/.test(userInput)) {
+            alert("ok");
             chrome.tabs.executeScript(tab.id, 
                 // Setting paremeter before execution of JS file
                 {code: 'var courseCode = ' + JSON.stringify(userInput)}, 
