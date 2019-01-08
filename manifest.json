@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "UWaterloo Course Info",
-    "version": "0.0.0.2",
+    "version": "0.0.1.5",
     "description": "Provides information about UWaterloo Courses when searched on Google.",
     "content_scripts":[
         {
@@ -19,10 +19,8 @@
         "default_title": "Click to Toggle!"
       },
       "permissions": [
-        "activeTab",
         "*://*/*",
         "storage",
-        "tabs",
         "notifications"
       ]
 }
