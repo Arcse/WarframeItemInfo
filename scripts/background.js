@@ -33,7 +33,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 });
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (buttonState === "on" && changeInfo.status === 'complete' && /(http|https):\/\/www\.google\./.test(tab.url)){
+    if (buttonState === "on" && changeInfo.status === 'complete' && /^(http|https):\/\/www\.google\..*$/.test(tab.url)){
         const url = new URL(tab.url)
         const params = new URLSearchParams(url.search);
         // var query = tab.url.substr(1).split("&");
