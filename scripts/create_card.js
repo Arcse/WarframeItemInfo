@@ -18,6 +18,11 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Returns the course name (e.g CS from CS240) from the query string.
+ * @param {String} courseCode
+ * @returns {String} courseName
+ */
 function getCourseName(courseCode){
     let courseName = "";
     for (let i = 0; i < courseCode.length; i++) {
@@ -31,6 +36,11 @@ function getCourseName(courseCode){
     return courseName;
 }
 
+/**
+ * Returns the course number (e.g 240 from CS240) from the query string.
+ * @param {String} courseCode 
+ * @returns {String} courseNumber
+ */
 function getCourseNumber(courseCode){
     for (let i = 0; i < courseCode.length; i++) {
         if (/[0-9]/.test(courseCode.charAt(i))){
@@ -39,6 +49,10 @@ function getCourseNumber(courseCode){
     }
 }
 
+/**
+ * Returns a card with the course data inside it.
+ * @param {Object} data 
+ */
 function createCard(data) {
     let card = document.createElement("div");
     card.className = "card";
@@ -67,6 +81,11 @@ function createCard(data) {
     return card;
 }
 
+/**
+ * Adds the relevant course data to the header
+ * @param {div} header 
+ * @param {Object} data 
+ */
 function addHeader(header, data) {
 
     let title = document.createElement("h5");
@@ -81,6 +100,11 @@ function addHeader(header, data) {
     header.append(subtitle);
 }
 
+/**
+ * Adds the relevant course data to the body
+ * @param {div} content 
+ * @param {Object} data 
+ */
 function addInfo(content, data) {
 
     let description = document.createElement("h5");
@@ -127,6 +151,11 @@ function addInfo(content, data) {
     content.append(offerings);
 }
 
+/**
+ * Adds UWFlow link and Calendar link to the course in the card body
+ * @param {div} content 
+ * @param {Object} data 
+ */
 function addLinks(content, data){
     let source = document.createElement("a");
     source.className = "btn btn-outline-primary";

@@ -1,6 +1,6 @@
 let buttonState = (chrome.storage.local.get(['buttonState'], function(result) {})) || "on"
 
-var on = {
+const on = {
     type: "basic",
      title: "Waterloo Course Info", 
      message: "Enabled", 
@@ -8,7 +8,7 @@ var on = {
      silent: true,
 }
 
-var off = {
+const off = {
     type: "basic",
      title: "Waterloo Course Info", 
      message: "Disabled", 
@@ -36,8 +36,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     if (buttonState === "on" && changeInfo.status === 'complete' && /^(http|https):\/\/www\.google\..*$/.test(tab.url)){
         const url = new URL(tab.url)
         const params = new URLSearchParams(url.search);
-        // var query = tab.url.substr(1).split("&");
-        // var userInput = query[1].slice(query[1].indexOf("=") + 1);
         var userInput = params.get('q');
         if (/^[a-zA-Z]{2,}\s?[0-9]{3}[a-zA-Z]?$/.test(userInput)) {
             chrome.tabs.executeScript(tab.id, 
